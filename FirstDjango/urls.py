@@ -23,4 +23,5 @@ urlpatterns = [
     path('', views.home),
     path('about', views.about),
     path('items', views.items_list),
+    path('item/<int:id>', views.item_detail),
 ]
