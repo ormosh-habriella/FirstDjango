@@ -10,11 +10,7 @@ items = [
 ]
 
 def home(request):
-    text = """
-    <h1>Welcome!</h1>
-    <a href='/items'>Список товаров</a>
-    """
-    return HttpResponse(text)
+    return render(request, "index.html")
 
 def about(request):
     text = f"Автор: <strong>Иван</strong>"
@@ -32,24 +28,19 @@ result = """
 """
 
 def items_list(request):
-    html = """
-    Список товаров:
-    <ol>
-    """
-    for item in items:
-        html += f"<li><a href='/item/{item['id']}'>{item['name']}</a></li>"
-
-    html += "</ol>"
-    return HttpResponse(html)
+    context = {
+        "items": items
+    }
+    return render(request, 'items_list.html', context)
 
 def item_detail(request, id):
     for item in items:
         if item["id"] == id:
-            html = f"""
-            <h2>{item['name']}</h2>
-            Количество: {item['quantity']}
-            <a href='/items'>Назад</a>
-            """
-            return HttpResponse(html)
+            context = {
+                "item": item
+            }
+            return render(request, 'item.html', context)
 
-    return HttpResponseNotFound(f"Товар с id={id} не найден")
+
+# def home_page(request):
+#     return render(request, 'index.html')
