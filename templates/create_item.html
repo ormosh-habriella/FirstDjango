@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Добавление товара
+{% endblock %}
+
+{% block content %}
+    <form action="" method="Post">
+    {% csrf_token %}
+        <label for="name">Название товара:</label><br>
+        <input type="text" name="name"><br>
+
+        <label for="brand">Бренд:</label><br>
+        <input type="text" name="brand"><br>
+
+        <label for="count">Количество:</label><br>
+        <input type="number" name="count"><br>
+
+        <label for="description">Описание:</label><br>
+        <textarea name="description" rows="10" cols="20"></textarea><br>
+
+        <label for="colors">Цвета:</label><br>
+        <select name="colors" multiple>
+            {% for color in colors %}
+                <option value="{{color.id}}">{{color.name}}</option>
+            {% endfor %}
+        </select>
+
+        <input type="submit" value="Добавить товар"><br>
+    </form>
+{% endblock %}
